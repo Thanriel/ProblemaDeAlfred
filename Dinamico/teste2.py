@@ -1,4 +1,6 @@
-def calculate_profit(k, dia, orçamento, last_prato, memo, pratos):
+def calculate_profit(dia, orçamento, last_prato):
+    memo = [[[-1] * (n + 1) for _ in range(m + 1)] for _ in range(k + 1)]
+     
     # Verificar se a solução já foi calculada anteriormente
     if memo[dia][orçamento][last_prato] != -1:
         return memo[dia][orçamento][last_prato]
@@ -9,7 +11,8 @@ def calculate_profit(k, dia, orçamento, last_prato, memo, pratos):
 
     # Caso contrário, para cada prato disponível
     max_profit = 0
-    for i in range(len(pratos)):
+    best_prato = -1  # Inicialmente nenhum prato é escolhido
+    for i in range(n):
         custo, lucro = pratos[i]
 
         # Verificar se é possível cozinhar o prato no dia atual
@@ -25,11 +28,13 @@ def calculate_profit(k, dia, orçamento, last_prato, memo, pratos):
             # Verificar se o lucro é maior que o máximo atual
             if profit > max_profit:
                 max_profit = profit
+                best_prato = i  # Atualizar o melhor prato escolhido
 
     # Atualizar a matriz de memoização
     memo[dia][orçamento][last_prato] = max_profit
 
-    return max_profit
+    # Retornar o lucro máximo e o melhor prato escolhido
+    return max_profit, best_prato
 
 
 def main():
@@ -51,10 +56,21 @@ def main():
         memo = [[[-1] * (n + 1) for _ in range(m + 1)] for _ in range(k + 1)]
 
         # Chamar a função para maximizar o lucro
-        max_profit = calculate_profit(k, 0, m, -1, memo, pratos)
+        max_profit, best_prato = calculate_profit(0, m, -1)
+
+        # Reconstruir a lista de pratos escolhidos
+        pratos_escolhidos = []
+        for _ in range(k):
+            pratos_escolhidos.append(best_prato + 1)  # Adicionar prato escolhido (+1 porque os pratos são indexados de 1 a n)
+            _, best_prato = calculate_profit(_, m, best_prato)  # Calcular o próximo melhor prato escolhido
 
         # Imprimir o lucro máximo com 1 dígito após o ponto decimal
         print(f'{max_profit:.1f}')
+
+        # Imprimir a lista de pratos escolhidos
+        for prato in pratos_escolhidos:
+            print(prato, end=' ')
+        print()
 
 
 if __name__ == '__main__':
