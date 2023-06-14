@@ -122,9 +122,9 @@ def CriarCardapio(pratos, k, m, pesos):
             
             # Verifica se todos os valores foram checados duas vezes
             if cont >= len(pesosOrdenados) and repetindo:
-                return 0, 0
+                return 0, []
             
-            else:
+            elif cont >= len(pesosOrdenados):
                 repetindo = True
                 cont = 0
                 
@@ -137,8 +137,20 @@ def main():
     for caso in casosTeste:
         k, n, m, pratos = caso
         pesos = CriaPesosPratos(pratos)
+        cardapio = []
         
-        CriarCardapio(pratos, k, m, pesos)
-
+        cardapio, lucro = CriarCardapio(pratos, k, m, pesos)
+        print('Resultados: ')
+        
+        if cardapio != 0:
+            print("Lucro: R$"+'{:.1f}'.format(lucro))
+            print('Pratos', end=' ')
+            for prato in cardapio:
+                print(prato, end=' ')
+            print()
+            
+        else:
+            print(0.0)
+        
 if __name__ == "__main__":
     main()   
