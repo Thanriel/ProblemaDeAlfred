@@ -21,3 +21,8 @@ O algoritmo subdivide os pratos com valores mais significativos conforme os cust
 # É baseado em algum algoritmo clássico?
 
 Para entendimento e como exemplo para resultados, foram adaptadas algumas partes do algoritmo para resolução do problema da mochila.
+
+
+# Link para o Github
+
+https://github.com/Thanriel/ProblemaDeAlfred.git
