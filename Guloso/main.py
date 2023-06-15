@@ -6,14 +6,29 @@ def LerCasosDeTeste():
     
     # Lê todos os casos de testes inseridos pelo usuário, critério de parada quando todos forem 0
     while True:
+        print('Insira os dias, quantidade de pratos e orçamento:', end=' ')
         k, n, m = map(int, input().split())
         if k == n == m == 0:
             break
+        while True:
+            if k <= 1 or k >= 21 or m <= 0 or m >= 100 or n <= 1 or n >= 50:
+                print('Insira os valores novamente:', end=' ')
+                k, n, m = map(int, input().split())
+            else:
+                break
+        
         
         pratos = []
         # Preenche o vetor da descrição dos pratos, com custo e lucro total
-        for _ in range(n):
+        for i in range(n):
+            print('Insira o custo e lucro do prato '+ str(i) +':', end=' ')
             c, v = map(int, input().split())
+            while True:
+                if c < 1 or c >= 50 or v < 1 or v >= 10000:
+                    print('Entradas fora do padrão, insira novamente: ', end=' ')
+                    c, v = map(int, input().split())
+                else:
+                    break
             pratos.append((c, v))
         
         casos_teste.append((k, n, m, pratos)) 

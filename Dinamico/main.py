@@ -43,12 +43,28 @@ def maximize_profit(k, n, m, dishes):
 
 
 def read_test_case():
+    print('Insira os dias, quantidade de pratos e orçamento: ', end=' ')
     k, n, m = map(int, input().split())
-    if k == 0 and n == 0 and m == 0:
-        return None
+    while True:    
+        if k == 0 and n == 0 and m == 0:
+            return None
+        
+        if k <= 1 or k >= 21 or m <= 0 or m >= 100 or n <= 1 or n >= 50:
+            print('Entradas fora do padrão, insira novamente: ', end=' ')
+            k, n, m = map(int, input().split())
+            break
+        else:
+            break
     dishes = []
-    for _ in range(n):
+    for i in range(n):
+        print('Insira o custo e lucro do prato '+ str(i) +':', end=' ')
         cost, profit = map(int, input().split())
+        while True:
+            if cost < 1 or cost >= 50 or profit < 1 or profit >= 10000:
+                print('Entradas fora do padrão, insira novamente: ', end=' ')
+                cost, profit = map(int, input().split())
+            else:
+                break
         dishes.append((cost, profit))
     return k, n, m, dishes
 
@@ -60,8 +76,10 @@ def main():
             break
         k, n, m, dishes = test_case
         max_profit, chosen_dishes = maximize_profit(k, n, m, dishes)
-        print(f'{max_profit:.1f}')
+        print()
+        print('Lucro: R$'f'{max_profit:.1f}')
         if max_profit > 0:
+            print('Pratos:', end=' ')
             for dish in chosen_dishes:
                 print(dish, end=' ')
         print()
