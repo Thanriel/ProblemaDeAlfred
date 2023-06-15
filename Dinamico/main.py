@@ -1,3 +1,6 @@
+# Autores: Samuel Gonzaga, Symon Breno e Thales Emanoel
+# Version 3.0 - 06/14/23
+
 def maximize_profit(k, n, m, dishes):
     # Cria uma matriz para armazenar os resultados intermediários
     dp = [[[0] * (m + 1) for _ in range(n + 1)] for _ in range(k + 1)]

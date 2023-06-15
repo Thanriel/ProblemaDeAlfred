@@ -1,3 +1,6 @@
+# Autores: Weuler Daniel, João Vitor Rosado e Thales Emanoel
+# Version 3.0 - 06/14/23 
+
 def LerCasosDeTeste():
     casos_teste = []
     
